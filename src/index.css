@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+@layer base {
+  /* Light theme - updated for better contrast and visual harmony */
+  :root {
+    --neon-primary: rgba(59, 130, 246, 0.5);
+    --neon-secondary: rgba(99, 102, 241, 0.5);
+    --neon-accent: rgba(139, 92, 246, 0.5);
+    --background-primary: #ffffff;
+    --background-secondary: #f8fafc;
+    --background-elevated: #f3f4f6;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-accent: #3b82f6;
+    --border-color: #e2e8f0;
+  }
+
+  /* Dark theme (unchanged) */
+  .dark {
+    --neon-primary: rgba(0, 243, 255, 0.7);
+    --neon-secondary: rgba(255, 0, 229, 0.7);
+    --neon-accent: rgba(112, 0, 255, 0.7);
+    --background-primary: #0a0a0f;
+    --background-secondary: #12121a;
+    --background-elevated: #1a1a24;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0b0;
+    --text-accent: #00f3ff;
+    --border-color: #2a2a35;
+  }
+
+  /* High contrast theme (unchanged) */
+  .high-contrast {
+    --neon-primary: rgba(0, 255, 0, 1);
+    --neon-secondary: rgba(255, 255, 0, 1);
+    --neon-accent: rgba(255, 0, 255, 1);
+    --background-primary: #000000;
+    --background-secondary: #0a0a0a;
+    --background-elevated: #141414;
+    --text-primary: #ffffff;
+    --text-secondary: #00ff00;
+    --text-accent: #ffff00;
+    --border-color: #00ff00;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+  }
+}
+
+@layer components {
+  .card {
+    @apply backdrop-blur-sm border rounded-xl p-4 transition-all duration-300;
+    background-color: var(--background-elevated);
+    border-color: var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .btn {
+    @apply px-4 py-2 rounded-lg transition-all duration-300
+           relative overflow-hidden;
+  }
+
+  .btn-primary {
+    @apply text-white font-medium;
+    background-color: var(--text-accent);
+  }
+
+  .btn-secondary {
+    background-color: var(--background-elevated);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+  }
+
+  .test-area {
+    @apply relative overflow-hidden transition-all duration-300 backdrop-blur-md rounded-xl;
+    background-color: var(--background-elevated);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .stats-card {
+    @apply backdrop-blur-sm rounded-lg p-4 transition-all duration-300;
+    background-color: var(--background-elevated);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Light mode specific card styles */
+  :root .stats-card {
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .input-gaming {
+    @apply rounded-lg px-4 py-2 transition-all duration-300;
+    background-color: var(--background-elevated);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+  }
+
+  .input-gaming:focus {
+    border-color: var(--text-accent);
+    box-shadow: 0 0 0 2px var(--text-accent);
+  }
+
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--text-accent) var(--background-elevated);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: var(--background-elevated);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--text-accent);
+    border-radius: 3px;
+  }
+}
+
+@layer utilities {
+  .hover-up {
+    @apply transition-transform duration-200 ease-out hover:-translate-y-1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .hover-up:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .theme-switcher-popup {
+    @apply z-50;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .neon-border {
+    position: relative;
+  }
+
+  .neon-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(
+      45deg,
+      var(--neon-primary),
+      var(--neon-secondary),
+      var(--neon-accent)
+    );
+    border-radius: inherit;
+    z-index: -1;
+    animation: neon-border-flow 4s linear infinite;
+    opacity: 0.5;
+  }
+
+  .neon-text {
+    color: var(--text-primary);
+    text-shadow: 0 0 2px var(--neon-primary),
+                 0 0 4px var(--neon-primary);
+  }
+
+  .gaming-gradient {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--neon-primary) 10%, transparent),
+      color-mix(in srgb, var(--neon-secondary) 10%, transparent),
+      color-mix(in srgb, var(--neon-accent) 10%, transparent)
+    );
+  }
+
+  /* Light mode specific adjustments */
+  :root .gaming-gradient {
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.1),
+      rgba(99, 102, 241, 0.1),
+      rgba(139, 92, 246, 0.1)
+    );
+  }
+
+  :root .neon-text {
+    text-shadow: 0 0 1px rgba(59, 130, 246, 0.5),
+                 0 0 2px rgba(59, 130, 246, 0.3);
+  }
+
+  /* Light mode specific card hover effects */
+  :root .stats-card:hover {
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  }
+}
